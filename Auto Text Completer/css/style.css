@@ -1,0 +1,26 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.container{
+  width: 100%;
+  height: 100vh;
+  /* The above written "VH" stands for "VIEWPORT HEIGHT". */
+  background: #2b323c;
+  color: #fff;
+  
+  display: flex;
+  /* Display : Flex is uesd to move the text to the center of the webpage. */
+  align-items: center;
+  /* Align Items : Center is used to center the content VERTICALLY in a webpage. */
+  justify-content: center;
+  /* Justify Content : Center is used to center the content HORIZONTALLY in a webpage. */
+}
+
+.container h1{
+  font-size: 80px;
+  font-weight: 600;
+}
