@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Copy To Clipboard</title>
+    <link rel="stylesheet" href="src/css/style.css" />
+  </head>
+  <body>
+    <!-- Flow Of The Project (Algorithm Of Copy To Clipboard)
+
+  1. Select some text from any available document to copy to clipboard.
+
+  2. Call a function (created in Javascript) to copy that text.
+
+  3. Here, the copying of the selected text is done only after a programmer presses CTRL + C Virtually. We are only implementing the logic behind the Copy To Clipboard Functionality. So, to do that, we can use an input field as tool to select & copy that particular text which we want to copy. -->
+
+    <div class="container">
+      <h2 id="title">Copy To Clipboard</h2>
+      <!-- Here, in the above h2, we can also use style="user-select: all" to implement the functionality of selecting all the text by just one click. (Used by GOOGLE CHROME BROWSER) -->
+
+      <input size="75" id="myInp" type="text" />
+      <!-- Here, by using the input field, we are automating the selecting and automating the copying at the same time. The "INPUT SELECTION METHOD" is easy to understand and use than the STYLE="USER-SELECT: ALL" METHOD -->
+
+      <button id="btnCopy">Copy</button>
+      <!-- When the "Copy" button is pressed, we are going to run a Javascript function that will copy all the text written in the input box and then copy the same text to the users/ clients clipboard. -->
+    </div>
+  </body>
+  <script src="src/javascript/main.js"></script>
+</html>
