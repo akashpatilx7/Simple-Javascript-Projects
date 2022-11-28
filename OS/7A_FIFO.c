@@ -32,7 +32,7 @@ int main()
 
 
 
-// 7B : Program 2
+// 7A : Program 2
 
 #include<stdio.h>
 #include<unistd.h>
