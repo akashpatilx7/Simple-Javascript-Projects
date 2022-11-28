@@ -23,7 +23,7 @@ int main()
     BT[9] = 9999; // infinity value
 
     printf("\n\nProcess\t|Turnaround Time|Waiting Time\n\n");
-    for (time = 0; count != n; time++)
+    for (time = 0; count != n; time++;)
     {
         smallest = 9;
         for (i = 0; i < n; i++)
