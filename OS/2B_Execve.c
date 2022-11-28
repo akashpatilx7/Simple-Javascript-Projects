@@ -43,12 +43,30 @@ int main(int argc , char * argv[])
         strcpy(newargv[i+1],a);
     }
     newargv[n+1]=NULL;
-    // pid=fork();
-    // if(pid == 0)
-    // {
+    pid=fork();
+    if(pid == 0)
+    {
     
         execve(argv[1],newargv,newenviron);
             perror("Error in Execve Call");
-   // }
+    }
 
+}
+
+
+
+
+
+// My Echo
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+int main(int argc, char * argv[])
+{
+    int j=argc;
+    for(int i=argc;i>=1;i--)
+    {
+        printf("%s\t",&argv[i]);
+    }
 }
