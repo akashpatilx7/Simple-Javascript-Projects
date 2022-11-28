@@ -1,89 +1,114 @@
-// 7A : Program 1
+// Program 1
 
-#include<stdio.h>
-#include<unistd.h>
-#include<stdlib.h>
-#include<string.h>
-#include<fcntl.h>
-#include<sys/types.h>
-#include<sys/stat.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#define FIFO1 "fifo1"
+#define FIFO2 "fifo2"
 
 int main()
 {
-    char * fifo1="file1";
-    char * fifo2="file2";
-    char str1[100],str2[100];
-    int fd1,fd2;
-    fd1=mkfifo(fifo1,0666);
-    fd2=mkfifo(fifo2,0666);
+	char buf[100],buf1[100];
+	int fd,fd1;
+	printf("\n__________________________________________\n");
+	printf("\nEnter a string with fullstop at end : \n");
+	printf("\n__________________________________________\n");
+	
+	scanf("%[^\n]",buf);
+	
+	mkfifo(FIFO1,0666);
+	fd=open(FIFO1,O_WRONLY);
 
-    printf("Enter sentences a ending with fullstop");
-    fgets(str1,100,stdin);
-
-    fd1=open(fifo1,O_WRONLY);
-    write(fd1,str1,100);
-
-    fd2=open(fifo2,O_RDONLY);
-    read(fd2,str2,100);
-
-    printf("Contents Readed From File are :\n");
-    orintf("%s",str2);
+	write(fd,buf,100);
+	printf("\n__________________________________________\n");
+	printf("\nMessage sent");
+	printf("\n__________________________________________\n");
+	close(fd);
+	//unlink(FIFO1);
+	fd1=open(FIFO2,O_RDONLY);
+	read(fd1,buf1,sizeof(buf1)+1);
+	printf("\n__________________________________________\n");
+	printf("\nMessage received");
+	printf("\n__________________________________________\n");
+	printf("\n%s",buf1);
+	close(fd1);
+	
+	return 0;
 }
 
 
 
-// 7A : Program 2
+// Program 2
 
-#include<stdio.h>
-#include<unistd.h>
-#include<stdlib.h>
-#include<string.h>
-#include<fcntl.h>
-#include<sys/types.h>
-#include<sys/stat.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#define FIFO1 "fifo1"
+#define FIFO2 "fifo2"
 
 int main()
 {
-    FILE *fp;
-    char * fifo1="file1";
-    char * fifo2="file2";
-    char str1[100],str2[100];
-    int fd1,fd2,nw=0,nl=0,nc=0,len;
-    char ch;
-
-    fd1=open(fifo1,O_RDONLY);
-    read(fd1,str1,100);
-    print("\nPipe 1 : %s",&str1);
-    close(fd1);
-
-    len=strlen(str1);
-
-    for(int i=0;i<strlen;i++)
-    {
-        if(str1[i] == ' ' || str1[i]=='.')
-            nw++;
-        if(str1[i]=='.' || str1[i]=="\n")
-            nl++;
-    }
-    nc=strlen(str1);
-
-    fp=open("abc.txt","w");
-    fprintf(fp,"\n No.oF characters : ",nc);
-    fprintf(fp,"\n No.oF characters : ",nc);
-    fprintf(fp,"\n No.oF characters : ",nc);
-    //fprintf(fp,"\0");
-    fclose(fp);
-
-    fp=open("abc.txt","r");
-    int i=0;
-    while((fgetc(ch)) != EOF)
-    {
-        str2[i]=ch;
-        i++;
-    }
-    fclose(fp);
-
-    fd2=open(fifo2,O_RDONLY);
-    read(fd2,str2,100);
-    
+	char buf[100],buf1[100];
+	int fd,fd1;
+	int words,lines,characters,len,i;
+	char ch;
+	FILE *fp;
+	fd=open(FIFO1,O_RDONLY);
+	read(fd,buf,100);
+	printf("\n__________________________________________\n");
+	printf("\nMessage received");
+	printf("\n__________________________________________\n");
+	printf("\n%s",buf);
+	len=strlen(buf);
+//	printf("\n %d ",sizeof(buf));
+	words=0;
+	lines=0;
+	characters=0;
+	for(i=0;i < len;i++)
+	{
+		if(buf[i] == ' ' || buf[i] == '.')
+			words++;
+	    if(buf[i] == '.')
+			lines++;
+	}
+	characters=strlen(buf);
+	printf("\n__________________________________________\n");
+	printf("\nCharacters = %d ",characters);
+	printf("\nWords = %d ",words);
+	printf("\nLines = %d ",lines);
+        printf("\n__________________________________________\n");
+	fp=fopen("abc.txt","w");
+	printf("\n__________________________________________\n");
+	fprintf(fp,"\nCharacters = %d.",characters);
+	fprintf(fp,"\nWords = %d.",words);
+	fprintf(fp,"\nLines = %d.",lines);
+	fclose(fp);
+	
+	fp=fopen("abc.txt","r");
+	i=0;
+	while((ch=fgetc(fp)) != EOF)
+	{
+		buf1[i]=ch;
+		i++;
+	}
+		
+	printf("\nBuffer contents\n");
+	printf("\n%s",buf1);
+	fclose(fp);
+	//unlink(FIFO1);
+	mkfifo(FIFO2,0666);
+	fd1=open(FIFO2,O_WRONLY);
+	write(fd1,buf1,sizeof(buf1)+1);
+	printf("\n__________________________________________\n");
+	printf("\nMessage sent");
+	printf("\n__________________________________________\n");	
+	return 0;
 }
