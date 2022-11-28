@@ -29,7 +29,6 @@ int main()
 
 // 7B : Program 2
 
-prog2
 #include<stdio.h>
 #include<sys/shm.h>
 #include<sys/ipc.h>
