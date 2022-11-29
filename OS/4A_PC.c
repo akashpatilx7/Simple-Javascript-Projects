@@ -9,7 +9,7 @@ pthread_mutex_t mutex;
 int buffer[5];
 int count = 0;
 
-void producer(void *arg) {
+void *producer(void *arg) {
     long int num = (long int) arg;
     
     sem_wait(&empty); 
@@ -26,7 +26,7 @@ void producer(void *arg) {
         
 }
 
-void consumer(void *arg) {
+void *consumer(void *arg) {
     long int num = (long int) arg;
     
     sem_wait(&full);
